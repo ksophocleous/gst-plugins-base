@@ -6,12 +6,19 @@
 Note to self, on msys2 mingw64 windows and to keep it clean:
 
 `mkdir -p build && cd build`
+
 `../autogen.sh --host=mingw64 --disable-x --disable-xvideo --disable-xshm`
+
 `(cd gst-libs && make)`
+
 `(cd ext && make)`
+
 `rm /mingw64/lib/gstreamer-1.0/libgstpango.dll`
+
 `gst-inspect-1.0 clockoverlay` <- should fail
+
 `cp ext/pango/.libs/libgstpango.dll /mingw64/lib/gstreamer-1.0/`
+
 `gst-inspect-1.0 epochoverlay` <- should succeed
 
 # ORIGINAL

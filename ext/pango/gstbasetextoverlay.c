@@ -122,6 +122,9 @@ GST_DEBUG_CATEGORY (pango_debug);
 #define MINIMUM_OUTLINE_OFFSET 1.0
 #define DEFAULT_SCALE_BASIS    640
 
+// disable text shadow rendering
+#define DRAW_SHADOW FALSE
+
 enum
 {
   PROP_0,
@@ -1583,8 +1586,7 @@ gst_base_text_overlay_render_pangocairo (GstBaseTextOverlay * overlay,
    */
 
   /* draw shadow text */
-  const bool draw_shadow = false;
-  if (draw_shadow)
+  if (DRAW_SHADOW)
   {
     PangoAttrList *origin_attr, *filtered_attr, *temp_attr;
 

@@ -21,7 +21,10 @@ On Linux:
 ```sh
 sudo add-apt-repository -y ppa:gstreamer-developers/ppa
 sudo apt-get update -y
-sudo apt-get install -y bison git-core autoconf pkg-config libtool autopoint gtk-doc-tools flex libogg-dev libtheora-dev libvorbis-dev libpango1.0-dev libasound2-dev libcdparanoia-dev libspeex-dev libjpeg-dev libwavpack-dev libopus-dev librtmp-dev libx264-dev yasm
+sudo apt-get install -y bison git-core autoconf pkg-config libtool autopoint \
+gtk-doc-tools flex libogg-dev libtheora-dev libvorbis-dev libpango1.0-dev \
+libasound2-dev libcdparanoia-dev libspeex-dev libjpeg-dev libwavpack-dev \
+libopus-dev librtmp-dev libx264-dev yasm
 
 wget http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.4.3.tar.xz
 tar xf gstreamer-1.4.3.tar.xz

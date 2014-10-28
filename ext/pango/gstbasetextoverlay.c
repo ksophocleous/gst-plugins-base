@@ -82,6 +82,7 @@
 #include "gsttextoverlay.h"
 #include "gsttimeoverlay.h"
 #include "gstclockoverlay.h"
+#include "gstepochoverlay.h"
 #include "gsttextrender.h"
 #include <string.h>
 
@@ -1582,6 +1583,8 @@ gst_base_text_overlay_render_pangocairo (GstBaseTextOverlay * overlay,
    */
 
   /* draw shadow text */
+  const bool draw_shadow = false;
+  if (draw_shadow)
   {
     PangoAttrList *origin_attr, *filtered_attr, *temp_attr;
 
@@ -2674,6 +2677,8 @@ plugin_init (GstPlugin * plugin)
           GST_TYPE_TIME_OVERLAY) ||
       !gst_element_register (plugin, "clockoverlay", GST_RANK_NONE,
           GST_TYPE_CLOCK_OVERLAY) ||
+      !gst_element_register (plugin, "epochoverlay", GST_RANK_NONE,
+          GST_TYPE_EPOCH_OVERLAY) ||
       !gst_element_register (plugin, "textrender", GST_RANK_NONE,
           GST_TYPE_TEXT_RENDER)) {
     return FALSE;

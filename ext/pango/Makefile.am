@@ -1,21 +1,23 @@
 plugin_LTLIBRARIES = libgstpango.la
 
 noinst_HEADERS = \
-        gstbasetextoverlay.h \
+    gstbasetextoverlay.h \
 	gstclockoverlay.h \
 	gsttextoverlay.h \
 	gsttextrender.h \
-	gsttimeoverlay.h
+	gsttimeoverlay.h \
+	gstepochoverlay.h
 
 libgstpango_la_SOURCES = \
 	gstbasetextoverlay.c \
 	gstclockoverlay.c \
 	gsttextoverlay.c \
 	gsttextrender.c \
-	gsttimeoverlay.c
+	gsttimeoverlay.c \
+	gstepochoverlay.c
 
 libgstpango_la_CFLAGS = \
-        $(GST_PLUGINS_BASE_CFLAGS) \
+    $(GST_PLUGINS_BASE_CFLAGS) \
 	$(GST_BASE_CFLAGS) \
 	$(GST_CFLAGS) \
 	$(PANGO_CFLAGS)

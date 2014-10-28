@@ -3,23 +3,49 @@
 * Added a epochoverlay filter to render the 64bit microseconds since start of the epoch
 * Disabled the shadow on all pango text overlays
 
-Note to self, on msys2 mingw64 windows and to keep it clean:
+Note to self, on msys2 mingw64 windows:
 
-`mkdir -p build && cd build`
+```sh
+mkdir -p build && cd build
+../autogen.sh --host=mingw64 --disable-x --disable-xvideo --disable-xshm
+(cd gst-libs && make)
+(cd ext && make)
+rm /mingw64/lib/gstreamer-1.0/libgstpango.dll
+gst-inspect-1.0 clockoverlay #should fail
+cp ext/pango/.libs/libgstpango.dll /mingw64/lib/gstreamer-1.0/
+gst-inspect-1.0 epochoverlay # should succeed
+```
 
-`../autogen.sh --host=mingw64 --disable-x --disable-xvideo --disable-xshm`
+On Linux:
 
-`(cd gst-libs && make)`
+```sh
+sudo add-apt-repository -y ppa:gstreamer-developers/ppa
+sudo apt-get update -y
+sudo apt-get install -y bison git-core autoconf pkg-config libtool autopoint gtk-doc-tools flex libogg-dev libtheora-dev libvorbis-dev libpango1.0-dev libasound2-dev libcdparanoia-dev libspeex-dev libjpeg-dev libwavpack-dev libopus-dev librtmp-dev libx264-dev yasm
 
-`(cd ext && make)`
+wget http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.4.3.tar.xz
+tar xf gstreamer-1.4.3.tar.xz
+(cd gstreamer-1.4.3 && ./configure && sudo make install)
 
-`rm /mingw64/lib/gstreamer-1.0/libgstpango.dll`
+git clone https://github.com/ksophocleous/gst-plugins-base.git
+(cd gst-plugins-base && sh autogen.sh && sudo make install && sudo ldconfig)
 
-`gst-inspect-1.0 clockoverlay` <- should fail
+wget http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.4.3.tar.xz
+tar xf gst-plugins-good-1.4.3.tar.xz
+(cd gst-plugins-good-1.4.3 && ./configure && sudo make install && sudo ldconfig)
 
-`cp ext/pango/.libs/libgstpango.dll /mingw64/lib/gstreamer-1.0/`
+wget http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.4.3.tar.xz
+tar xf gst-plugins-bad-1.4.3.tar.xz
+(cd gst-plugins-bad-1.4.3 && ./configure && sudo make install && sudo ldconfig)
 
-`gst-inspect-1.0 epochoverlay` <- should succeed
+wget http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-1.4.3.tar.xz
+tar xf gst-plugins-ugly-1.4.3.tar.xz
+(cd gst-plugins-ugly-1.4.3 && ./configure && sudo make install && sudo ldconfig)
+
+wget http://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.4.3.tar.xz
+tar xf gst-libav-1.4.3.tar.xz
+(cd gst-libav-1.4.3 && ./configure && sudo make install && sudo ldconfig)
+```
 
 # ORIGINAL
 

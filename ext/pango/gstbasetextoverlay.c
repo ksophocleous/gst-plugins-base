@@ -117,7 +117,7 @@ GST_DEBUG_CATEGORY (pango_debug);
 #define DEFAULT_PROP_OUTLINE_COLOR 0xff000000
 
 /* make a property of me */
-#define DEFAULT_SHADING_VALUE    -80
+#define DEFAULT_SHADING_VALUE 0xff // used to be -80
 
 #define MINIMUM_OUTLINE_OFFSET 1.0
 #define DEFAULT_SCALE_BASIS    640
@@ -1567,8 +1567,8 @@ gst_base_text_overlay_render_pangocairo (GstBaseTextOverlay * overlay,
 
   cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
 
-  if (overlay->want_shading)
-    cairo_paint_with_alpha (cr, overlay->shading_value);
+//  if (overlay->want_shading)
+//    cairo_paint_with_alpha (cr, overlay->shading_value);
 
   /* apply transformations */
   cairo_set_matrix (cr, &cairo_matrix);
@@ -1618,12 +1618,15 @@ gst_base_text_overlay_render_pangocairo (GstBaseTextOverlay * overlay,
   b = (overlay->outline_color >> 0) & 0xff;
 
   /* draw outline text */
-  cairo_save (cr);
-  cairo_set_source_rgba (cr, r / 255.0, g / 255.0, b / 255.0, a / 255.0);
-  cairo_set_line_width (cr, overlay->outline_offset);
-  pango_cairo_layout_path (cr, overlay->layout);
-  cairo_stroke (cr);
-  cairo_restore (cr);
+  if (overlay->outline_offset != 0)
+  {
+    cairo_save (cr);
+    cairo_set_source_rgba (cr, r / 255.0, g / 255.0, b / 255.0, a / 255.0);
+    cairo_set_line_width (cr, overlay->outline_offset);
+    pango_cairo_layout_path (cr, overlay->layout);
+    cairo_stroke (cr);
+    cairo_restore (cr);
+  }
 
   a = (overlay->color >> 24) & 0xff;
   r = (overlay->color >> 16) & 0xff;

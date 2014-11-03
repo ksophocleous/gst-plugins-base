@@ -2,6 +2,7 @@
 
 * Added a epochoverlay filter to render the 64bit microseconds since start of the epoch
 * Disabled the shadow on all pango text overlays
+* The shaded-background property now renders a WHITE background instead of a black one - Warning: Do not use planar formats as it's buggy and it does not make the background fully opaque. This is great for OCRing a piece of text or number (rendering black text on white background is a requirement afaik)
 
 Note to self, on msys2 mingw64 windows:
 
